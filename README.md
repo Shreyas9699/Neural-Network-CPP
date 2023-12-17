@@ -9,4 +9,7 @@ To run the Logic Gate Tester <br />
 
 ## Creating XOR using Multilayer Perceptrons
 Logic behind:
-![Alt text](image-1.png)
+![Alt text](Images/image-1.png)
+
+## Error Function
+![Alt text](Images/image-2.png)
