@@ -147,3 +147,4 @@ Finally, here is the implementation of recognize number from a seven segment dis
 > `g++ SegDisplayRecog.cpp header/MLPerceptrons.cpp -o SegDisplayRecog -I./header` <br/>
 > `./SegDisplayRecog`
 
+Works best after training for 12000 epochs, and 7 to 10 NN is accurate most of the time.
