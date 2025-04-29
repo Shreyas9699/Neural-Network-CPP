@@ -79,10 +79,8 @@ For Error of 1 Sample:
 - Sample {X, Y}
 - Assume we got Output value = 0.6
 - Expected value is Y = 1
-- So, the error is calculated as Error = y - output 
-<br />
-The goal is to make trining function to y, i.e output = y
-<br />
+- So, the error is calculated as Error = y - output  
+The goal is to make trining function to y, i.e output = y  
 
 
 ***Means Squared Error (MSE)*** is used to assess the performance of the NN
@@ -137,14 +135,59 @@ Optical Character Recognition: <br/>
 - Reading (Text from images to/ text string to Speech)
 
 
-
 Finally, here is the implementation of recognize number from a seven segment display.
 - Given a vector of double floats, each indicating the brightness of one of each segments.
 - Based on which the Neural Network will give the output number.
 
+Seven segments are arranged as follows:
+```
+ --a--
+|     |
+f     b
+|     |
+ --g--
+|     |
+e     c
+|     |
+ --d--
+```
+Where the input pattern follows the order: `a b c d e f g`
+
+![alt text](Images/image.png)
 
 *Cmd*:
 > `g++ SegDisplayRecog.cpp header/MLPerceptrons.cpp -o SegDisplayRecog -I./header` <br/>
 > `./SegDisplayRecog`
 
 Works best after training for 12000 epochs, and 7 to 10 NN is accurate most of the time.
+
+### Sample inputs and expected outputs:
+Input (a b c d e f g) | Output |
+--- | --- |
+1 1 1 1 1 1 0  | `0` |
+0.55 0.55 0.55 0.55 0.55 0.55 0 | `0`|
+
+### Noisy Inputs (with missing or extra segments):
+Input (a b c d e f g) | Output | Expected (visually closest) |
+--- | --- | --- |
+1 0 1 1 1 1 0 | `0`/`6` | `0` (seg b missing) or `6` (seg g missing)|
+0 1 1 0 0 1 0 | `6`/`1` | `4` (seg g missing) |
+1 1 0 1 1 0 0 | `0` | `2` (seg g missing)
+1 1 1 1 1 0 1 | `4`/`6` | `8` (seg f missing)
+
+### Partial Inputs (with intensity variations)
+Input (a b c d e f g) | Output |
+--- | --- |
+0.8 0.9 0.7 0.8 0.9 0.8 0.1 | `0` |
+0.1 0.9 0.8 0.2 0.1 0.1 0.1 | `1` |
+0.7 0.9 0.2 0.8 0.7 0.1 0.9 | `2` |
+
+### Novel Inputs (patterns that don't match standard digits)
+Input (a b c d e f g) | Output | Expected |
+--- | --- | --- |
+0 0 0 1 1 1 1 | `0`/`6` | `6` (c seg is missing) |
+1 0 0 1 0 1 0 | `0`/`9` | `5` (seg c and f are missing) or `6` (seg c, e and g missing) or `9` (seg b, c and g missing) |
+0 1 0 1 0 1 0 | `0`/`9` | `4` (seg g and c missing) / `9` (seg a, c and g missing) |
+
+
+#### Note: Outputs are not precise since the training is done on very small NN, and it works well for Partial Inputs and regurla inputs and have varying outputs for other kind of inputs.
