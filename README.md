@@ -61,8 +61,6 @@ Types of activation functions:
 - *Hyperbolic Tangent Function*: Limits output values between -1 and 1, i.e. all real number between -1 and 1.
 - *Rectified Linear Unit Function (ReLU)*: Limits output to be positive values, unbounded for +ve values only.
 
-For this project the **Sigmoid Function** is implemented.
-
 ## How to make Neural Network learn?
 Now that we have Multi-Layer Perceptron and Activation Function to implement a complex Logic gates such as XOR, which can not be implemented by a single Perceptron. But what makes NN stand out is its ability to learn. How can NN learn? <br/>
 Let's see, for 1 single Training Sample: {X, Y} (Where X is the feature and Y is the expected/desired value)
